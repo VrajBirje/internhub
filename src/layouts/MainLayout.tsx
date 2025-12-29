@@ -1,20 +1,23 @@
 import React from 'react'
 import { Outlet, Link } from 'react-router-dom'
+import AnnouncementStrip from '../components/homepage/AnnouncementStrip'
+import HomepageNavbar from '../components/homepage/HomepageNavbar'
+import HomepageFooter from '../components/homepage/HomepageFooter'
+
+const headerStyle: React.CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 12, borderBottom: '1px solid #eee' }
+const navStyle: React.CSSProperties = { display: 'flex', gap: 12, alignItems: 'center' }
 
 const MainLayout: React.FC = () => {
   return (
-    <div>
-      <header style={{padding:10, borderBottom:'1px solid #eee'}}>
-        <nav>
-          <Link to="/">Home</Link> | <Link to="/about">About</Link> | <Link to="/auth/login">Login</Link>
-        </nav>
-      </header>
-      <main style={{padding:20}}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <AnnouncementStrip />
+      <HomepageNavbar />
+
+      <main style={{ flex: 1, padding: 20, maxWidth: 1100, margin: '0 auto', width: '100%' }}>
         <Outlet />
       </main>
-      <footer style={{padding:10, borderTop:'1px solid #eee'}}>
-        InternHub © {new Date().getFullYear()}
-      </footer>
+
+       <HomepageFooter />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import DetailedInternshipCard from './DetailedInternshipCard'
 
 const categories = ['All','Web Development','App Development','Content','Design','Data Science']
@@ -10,20 +10,41 @@ const dummy = [
   {title:'Mobile App Intern', company:'AppWorks', location:'Delhi', stipend:'₹10,000', tags:['Flutter','Dart']}
 ]
 
-const HotInternships: React.FC = () =>{
-  const [active,setActive] = useState('All')
+const HotInternships: React.FC = () => {
+  const [active, setActive] = useState('All')
+
   return (
     <section className="hot-section">
-      <h3>Hot Internships</h3>
+      <div className="hot-header">
+        <div>
+          <h3>Hot Internships</h3>
+          <p className="hot-subtitle">Handpicked roles trending among students right now.</p>
+        </div>
+        <span className="hot-badge">🔥 Updated daily</span>
+      </div>
+
       <div className="category-filters">
         {categories.map(cat => (
-          <button key={cat} className={`cat-btn ${active===cat? 'active':''}`} onClick={() => setActive(cat)}>{cat}</button>
+          <button
+            key={cat}
+            className={`cat-btn ${active === cat ? 'active' : ''}`}
+            onClick={() => setActive(cat)}
+          >
+            {cat}
+          </button>
         ))}
       </div>
 
       <div className="hot-grid">
-        {dummy.map((d,idx) => (
-          <DetailedInternshipCard key={idx} title={d.title} company={d.company} location={d.location} stipend={d.stipend} tags={d.tags} />
+        {dummy.map((d, idx) => (
+          <DetailedInternshipCard
+            key={idx}
+            title={d.title}
+            company={d.company}
+            location={d.location}
+            stipend={d.stipend}
+            tags={d.tags}
+          />
         ))}
       </div>
     </section>

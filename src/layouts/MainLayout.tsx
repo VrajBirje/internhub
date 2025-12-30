@@ -13,11 +13,11 @@ const MainLayout: React.FC = () => {
       <AnnouncementStrip />
       <HomepageNavbar />
 
-      <main style={{ flex: 1, padding: 20, maxWidth: 1100, margin: '0 auto', width: '100%' }}>
+      <main style={{ flex: 1, padding: '20px 5vw' }}>
         <Outlet />
       </main>
 
-       <HomepageFooter />
+      <HomepageFooter />
     </div>
   )
 }

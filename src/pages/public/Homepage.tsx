@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 // import '../../assets/styles/HomePage.css';
-import '../../pages/public/homepage.css';
+import '../../assets/styles/homepage.css';
 import HotInternships from '../../components/homepage/HotInternships';
 import ProudPartners from '../../components/homepage/ProudPartners';
 

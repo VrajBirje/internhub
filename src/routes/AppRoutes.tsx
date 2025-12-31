@@ -6,10 +6,11 @@ import AuthLayout from '../layouts/AuthLayout'
 
 // Auth (public)
 const Login = lazy(() => import('../pages/auth/Login'))
-const Register = lazy(() => import('../pages/auth/Register'))
+const StudentRegister = lazy(() => import('../pages/auth/StudentRegister'))
 const ForgotPassword = lazy(() => import('../pages/auth/ForgotPassword'))
 const ResetPassword = lazy(() => import('../pages/auth/ResetPassword'))
 const EmailVerification = lazy(() => import('../pages/auth/EmailVerification'))
+const CompanyRegister = lazy(() => import('../pages/auth/CompanyRegister'))
 
 // Student (protected)
 const StudentDashboard = lazy(() => import('../pages/student/StudentDashboard'))
@@ -38,7 +39,8 @@ const AppRoutes: React.FC = () => {
 
       <Route path="/auth" element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="student-register" element={<StudentRegister />} />
+        <Route path="company-register" element={<CompanyRegister />} />
         <Route path="forgot" element={<ForgotPassword />} />
         <Route path="reset" element={<ResetPassword />} />
         <Route path="verify" element={<EmailVerification />} />

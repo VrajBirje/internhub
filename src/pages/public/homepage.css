@@ -186,46 +186,6 @@
   border-color: #cbd5f5;
 }
 
-/* Dropdown */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 8px);
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
-  padding: 12px;
-  border-radius: 10px;
-  display: none;
-  min-width: 260px;
-  z-index: 30;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu .col {
-  padding: 6px;
-}
-
-.dropdown-menu strong {
-  font-size: 13px;
-  color: #111827;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.dropdown-menu .col div {
-  font-size: 13px;
-  color: #4b5563;
-  padding: 2px 0;
-}
-
 /* Responsive */
 @media (max-width: 900px) {
   .hp-search {
@@ -564,6 +524,96 @@
   text-align: center;
   width: 100%;
   max-width: 1100px;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+
+.nav-link-btn {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.nav-link-btn:hover {
+  background: #f1f5f9;
+}
+
+/* MEGA MENU */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 520px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-inner {
+  display: flex !important; 
+  min-height: 260px;
+}
+
+/* LEFT COLUMN */
+.menu-left {
+  width: 190px;
+  background: #f8fafc;
+  border-right: 1px solid #e5e7eb;
+  padding: 10px;
+}
+
+.menu-item {
+  padding: 12px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  color: #374151;
+  transition: all 0.15s ease;
+}
+
+.menu-item:hover {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.menu-item.active {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* RIGHT COLUMN */
+.menu-right {
+  flex: 1;
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sub-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #111827;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sub-item:hover {
+  background: #f1f5f9;
+  color: #0284c7;
 }
 
 /* Responsive */

@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import '../public/homepage.css';
-import HomepageNavbar from '../../components/homepage/HomepageNavbar';
-import AnnouncementStrip from '../../components/homepage/AnnouncementStrip';
+// import '../../assets/styles/HomePage.css';
+import '../../pages/public/homepage.css';
 import HotInternships from '../../components/homepage/HotInternships';
 import ProudPartners from '../../components/homepage/ProudPartners';
-import HomepageFooter from '../../components/homepage/HomepageFooter';
 
 const slides = [
   {title:'Work on real projects with top startups', subtitle:'Paid & remote internships to kickstart your career'},

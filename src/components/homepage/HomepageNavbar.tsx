@@ -79,8 +79,13 @@ const HomepageNavbar: React.FC = () => {
       </div>
 
       <div className="nav-right">
-        <Link to="/auth/login">Login</Link>
-        <Link to="/auth/register">Register</Link>
+        <div className="hp-search">
+          <input placeholder="Search internships, skills, companies..." />
+          <button className="search-btn">Search</button>
+        </div>
+        <Link to="/auth/login" className="nav-auth nav-login"> Login </Link>
+        <Link to="/auth/register" className="nav-auth nav-register"> Register </Link>
+        <Link to="/auth/register" className="nav-company"> Company Register </Link>
       </div>
     </div>
   );

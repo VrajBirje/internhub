@@ -1,64 +1,314 @@
-.register-container {
+:root {
+  --primary: #66CDAA;
+  --primary-dark: #20B2AA;
+}
+
+/* full background like reference UI */
+.sr-root {
   min-height: 100vh;
+  padding: 40px 0 80px;
+  background: radial-gradient(circle at top, #f0f9f6, #e5f5f3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* top heading */
+.sr-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.sr-logo-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fffdee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.sr-header-text {
+  text-align: center;
+}
+
+.sr-header-text h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.sr-header-text p {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* stepper like circles with line */
+.sr-stepper {
   display: flex;
   justify-content: center;
+  gap: 40px;
+  margin-bottom: 26px;
+}
+
+.sr-step {
+  position: relative;
+  text-align: center;
+  min-width: 56px;
+}
+
+.sr-step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 auto 6px;
+  color: #4b5563;
+}
+
+.sr-step span {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.sr-step-line {
+  position: absolute;
+  top: 15px;
+  left: 115%;
+  width: 55px;
+  height: 2px;
+  background: #e5e7eb;
+}
+
+.sr-step.active .sr-step-circle {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.sr-step.active span {
+  color: #111827;
+}
+
+/* main white card */
+.sr-card {
+  width: 100%;
+  max-width: 860px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  padding: 28px 32px 26px;
+}
+
+/* form layout */
+.sr-form h2 {
+  margin-bottom: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.sr-field {
+  margin-bottom: 14px;
+}
+
+.sr-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.sr-field input,
+.sr-date-input {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  background: #f9fafb;
+  color: #213547;
+}
+
+.sr-field input::placeholder {
+  color: #9ca3af;
+}
+
+.sr-field input:focus,
+.sr-date-input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(102, 205, 170, 0.25);
+}
+
+/* grid layout for two-column rows */
+.sr-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* make sure inner fields don’t overflow and overlap */
+.sr-grid-2 .sr-field {
+  width: 100%;
+}
+
+.sr-grid-2 .sr-field input {
+  display: block;
+  width: 100%;
+}
+
+/* hint + error */
+.sr-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.sr-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #dc2626;
+}
+
+/* iOS-style select */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 11px 40px 11px 13px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 55%;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #9ca3af;
+  border-bottom: 2px solid #9ca3af;
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
+
+.select-wrapper select:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(102, 205, 170, 0.25);
+}
+
+/* bottom actions */
+.sr-actions {
+  display: flex;
+  width: 100%;
+  justify-content:space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.sr-btn-primary,
+.sr-btn-outline {
+  padding: 11px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease,
+  background 0.12s ease;
+}
+
+.sr-btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(102, 205, 170, 0.35);
+}
+
+.sr-btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.sr-btn-primary.disabled,
+.sr-btn-primary.disabled:hover {
+  background: #d1d5db;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sr-btn-outline {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+.sr-btn-outline:hover {
   background: #f3f4f6;
 }
 
-.register-card {
-  width: 100%;
-  max-width: 700px;
-  background: var(--white);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+/* resume preview card */
+.sr-resume-preview {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f9fafb;
+  border: 1px dashed #d1d5db;
 }
 
-/* Stepper */
-.stepper {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
-}
-
-.step {
-  flex: 1;
-  text-align: center;
-  font-size: 13px;
-  padding: 8px;
-  border-bottom: 2px solid var(--border);
-  color: var(--muted);
-}
-
-.step.active {
-  border-color: var(--primary);
-  color: var(--primary-dark);
+.sr-resume-preview h3 {
+  margin-bottom: 4px;
+  font-size: 15px;
   font-weight: 600;
 }
 
-/* Helpers */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+.sr-resume-preview p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
+/* responsive */
+@media (max-width: 768px) {
+  .sr-card {
+    margin: 0 12px;
+    padding: 22px 18px 20px;
+  }
 
-/* Resume Preview */
-.resume-preview {
-  padding: 16px;
-  border-radius: 12px;
-  background: var(--input-bg);
-  border: 1px dashed var(--border);
-}
+  .sr-grid-2 {
+    grid-template-columns: 1fr;
+  }
 
-.resume-preview h4 {
-  margin: 0 0 8px;
-  color: var(--text);
+  .sr-stepper {
+    gap: 22px;
+  }
+
+  .sr-step-line {
+    width: 30px;
+  }
 }

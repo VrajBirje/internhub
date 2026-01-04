@@ -1,193 +1,346 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./../../assets/styles/studentregister.css";
 
 const StudentRegister: React.FC = () => {
   const [step, setStep] = useState(1);
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    sapId: "",
+    firstName: "",
+    lastName: "",
+    dob: "",
+    gender: "",
+    phone: "",
+    altEmail: "",
+  });
+  const [dob, setDob] = useState<Date | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
+  const phoneValid = /^[6-9]\d{9}$/.test(form.phone);
+  const passwordValid =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+      form.password
+    );
+  const isStep1Valid = emailValid && phoneValid && passwordValid;
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        {/* Stepper */}
-        <div className="stepper">
-          {[1, 2, 3, 4].map((s) => (
-            <div key={s} className={`step ${step === s ? "active" : ""}`}>
-              Step {s}
-            </div>
-          ))}
+    <div className="sr-root">
+      {/* Top heading area */}
+      <header className="sr-header">
+        <div className="sr-logo-circle">
+          <span>🎓</span>
+        </div>
+        <div className="sr-header-text">
+          <h1>Student Registration</h1>
+          <p>Complete your profile to start applying for internships.</p>
         </div>
 
-        {/* STEP 1 – Personal Details */}
+      </header>
+
+      {/* Stepper row */}
+      <div className="sr-stepper">
+        {[
+          { id: 1, label: "Personal" },
+          { id: 2, label: "Education" },
+          { id: 3, label: "Skills" },
+          { id: 4, label: "Resume" },
+        ].map((s, index, arr) => (
+          <div
+            key={s.id}
+            className={`sr-step ${step >= s.id ? "active" : ""}`}
+          >
+            <div className="sr-step-circle">{s.id}</div>
+            <span>{s.label}</span>
+            {index !== arr.length - 1 && (
+              <div className="sr-step-line" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Main white card */}
+      <div className="sr-card">
         {step === 1 && (
-          <form className="anyinput-form">
-            <h3>Personal Details</h3>
+          <form className="sr-form">
+            <h2>Personal details</h2>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>Username</label>
-              <input type="text" />
+              <input
+                name="username"
+                placeholder="Enter username"
+                onChange={handleChange}
+              />
             </div>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>Email</label>
-              <input type="email" />
+              <input
+                name="email"
+                placeholder="example@gmail.com"
+                onChange={handleChange}
+              />
+              {!emailValid && form.email && (
+                <small className="sr-error">Invalid email format</small>
+              )}
             </div>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>Password</label>
-              <input type="password" />
+              <input
+                type="password"
+                placeholder="********"
+                name="password"
+                onChange={handleChange}
+              />
+              <small className="sr-hint">
+                Password must contain at least 8 characters, one uppercase
+                letter, one number, and one special symbol.
+              </small>
+              {!passwordValid && form.password && (
+                <small className="sr-error">
+                  Password does not meet criteria
+                </small>
+              )}
             </div>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>SAP ID</label>
-              <input type="text" />
+              <input
+                name="sapId"
+                placeholder="Enter SAP ID"
+                onChange={handleChange}
+              />
             </div>
 
-            <div className="grid-2">
-              <div className="anyinput-field">
+            <div className="sr-grid-2">
+              <div className="sr-field">
                 <label>First Name</label>
-                <input type="text" />
+                <input
+                  name="firstName"
+                  placeholder="First name"
+                  onChange={handleChange}
+                />
               </div>
-              <div className="anyinput-field">
+              <div className="sr-field">
                 <label>Last Name</label>
-                <input type="text" />
+                <input
+                  name="lastName"
+                  placeholder="Last name"
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
-            <div className="grid-2">
-              <div className="anyinput-field">
+            <div className="sr-grid-2">
+              <div className="sr-field">
                 <label>Date of Birth</label>
-                <input type="date" />
+                <DatePicker
+                  selected={dob}
+                  onChange={(date) => {
+                    setDob(date);
+                    setForm({
+                      ...form,
+                      dob: date ? date.toISOString() : "",
+                    });
+                  }}
+                  dateFormat="dd-MM-yyyy"
+                  placeholderText="DD-MM-YYYY"
+                  className="sr-date-input"
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                />
               </div>
-              <div className="anyinput-field">
+
+              <div className="sr-field select-wrapper">
                 <label>Gender</label>
-                <input type="text" />
+                <select name="gender" onChange={handleChange}>
+                  <option value="">Select gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
               </div>
             </div>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>Phone Number</label>
-              <input type="text" />
+              <input
+                name="phone"
+                placeholder="10-digit mobile number"
+                onChange={handleChange}
+              />
+              {!phoneValid && form.phone && (
+                <small className="sr-error">Invalid phone number</small>
+              )}
             </div>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>Alternate Email</label>
-              <input type="email" />
+              <input
+                name="altEmail"
+                placeholder="Optional"
+                onChange={handleChange}
+              />
             </div>
 
-            <button type="button" className="any-button" onClick={() => setStep(2)}>
-              Next
-            </button>
+            <div className="sr-actions">
+              <div></div>
+              <button
+                type="button"
+                className={`sr-btn-primary 
+                  ${!isStep1Valid ? "disabled" : ""
+                  }
+                  `}
+                // disabled={!isStep1Valid}
+                onClick={() => setStep(2)}
+              >
+                Next
+              </button>
+
+            </div>
           </form>
         )}
 
-        {/* STEP 2 – Education */}
         {step === 2 && (
-          <form className="anyinput-form">
-            <h3>Education Details</h3>
+          <form className="sr-form">
+            <h2>Education details</h2>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>College Name</label>
               <input type="text" />
             </div>
 
-            <div className="grid-2">
-              <div className="anyinput-field">
+            <div className="sr-grid-2">
+              <div className="sr-field">
                 <label>Branch</label>
                 <input type="text" />
               </div>
-              <div className="anyinput-field">
+              <div className="sr-field">
                 <label>Branch Code</label>
                 <input type="text" />
               </div>
             </div>
 
-            <div className="grid-2">
-              <div className="anyinput-field">
+            <div className="sr-grid-2">
+              <div className="sr-field">
                 <label>Enrollment Year</label>
                 <input type="number" />
               </div>
-              <div className="anyinput-field">
+              <div className="sr-field">
                 <label>Graduation Year</label>
                 <input type="number" />
               </div>
             </div>
 
-            <div className="grid-2">
-              <div className="anyinput-field">
+            <div className="sr-grid-2">
+              <div className="sr-field">
                 <label>Current Semester</label>
                 <input type="number" />
               </div>
-              <div className="anyinput-field">
+              <div className="sr-field">
                 <label>CGPA</label>
                 <input type="number" />
               </div>
             </div>
 
-            <div className="actions">
-              <button className="outline-button" type="button" onClick={() => setStep(1)}>
-                Back
+            <div className="sr-actions">
+              <button
+                className="sr-btn-outline"
+                type="button"
+                onClick={() => setStep(1)}
+              >
+                Previous
               </button>
-              <button className="any-button" type="button" onClick={() => setStep(3)}>
+              <button
+                className="sr-btn-primary"
+                type="button"
+                onClick={() => setStep(3)}
+              >
                 Next
               </button>
             </div>
           </form>
         )}
 
-        {/* STEP 3 – Skills, Experience, Projects */}
         {step === 3 && (
-          <form className="anyinput-form">
-            <h3>Skills & Experience</h3>
+          <form className="sr-form">
+            <h2>Skills & experience</h2>
 
-            <div className="anyinput-field">
+            <div className="sr-field">
               <label>Skills (comma separated)</label>
               <input type="text" />
             </div>
 
-            <div className="anyinput-field">
-              <label>Experience Summary</label>
+            <div className="sr-field">
+              <label>Experience summary</label>
               <input type="text" />
             </div>
 
-            <div className="anyinput-field">
-              <label>Projects Summary</label>
+            <div className="sr-field">
+              <label>Projects summary</label>
               <input type="text" />
             </div>
 
-            <div className="actions">
-              <button className="outline-button" type="button" onClick={() => setStep(2)}>
-                Back
+            <div className="sr-actions">
+              <button
+                className="sr-btn-outline"
+                type="button"
+                onClick={() => setStep(2)}
+              >
+                Previous
               </button>
-              <button className="any-button" type="button" onClick={() => setStep(4)}>
+              <button
+                className="sr-btn-primary"
+                type="button"
+                onClick={() => setStep(4)}
+              >
                 Next
               </button>
             </div>
           </form>
         )}
 
-        {/* STEP 4 – Resume */}
         {step === 4 && (
-          <div className="anyinput-form">
-            <h3>Resume</h3>
+          <div className="sr-form">
+            <h2>Resume</h2>
 
-            <div className="anyinput-field">
-              <label>Upload Resume</label>
+            <div className="sr-field">
+              <label>Upload resume</label>
               <input type="file" />
             </div>
 
-            <div className="resume-preview">
-              <h4>Resume Builder Preview</h4>
+            <div className="sr-resume-preview">
+              <h3>Resume builder preview</h3>
               <p>
-                This section auto-generates a clean, professional resume using
-                your provided details.
+                A clean, professional resume will be generated using the
+                information you have provided.
               </p>
-              <button className="outline-button">Download PDF</button>
+              <button className="sr-btn-outline">Download PDF</button>
             </div>
 
-            <div className="actions">
-              <button className="outline-button" onClick={() => setStep(3)}>
-                Back
+            <div className="sr-actions">
+              <button
+                className="sr-btn-outline"
+                type="button"
+                onClick={() => setStep(3)}
+              >
+                Previous
               </button>
-              <button className="any-button">Complete Registration</button>
+              <button className="sr-btn-primary">
+                Complete registration
+              </button>
             </div>
           </div>
         )}

@@ -12,6 +12,7 @@
   background: var(--white);
   border-radius: 16px;
   padding: 32px;
+  margin: 100px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
